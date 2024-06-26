@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
-import { setSingleProduct } from "../redux/productSlice";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// ProductDetails.js
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, setCartLength } from '../redux/cartSlice';
+import { setSingleProduct } from '../redux/productSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -27,8 +28,8 @@ const ProductDetails = () => {
         );
         dispatch(setSingleProduct(response.data));
       } catch (err) {
-        setError("Error fetching the product");
-        console.error("Error fetching the product:", err);
+        setError('Error fetching the product');
+        console.error('Error fetching the product:', err);
       } finally {
         setLoading(false);
       }
@@ -36,7 +37,7 @@ const ProductDetails = () => {
     if (productId) {
       fetchProduct();
     } else {
-      setError("Invalid product ID");
+      setError('Invalid product ID');
       setLoading(false);
     }
   }, [productId, dispatch]);
@@ -60,29 +61,40 @@ const ProductDetails = () => {
       if (response.status === 201) {
         dispatch(addToCart({ ...product, quantity }));
 
-        toast.success("Product added to cart", {
-          position: "top-center",
+        // Fetch updated cart length
+        const cartResponse = await axios.get(
+          `https://api.bhartiyabiotech.com/cart/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+        dispatch(setCartLength(cartResponse.data.varient_quantity.length));
+
+        toast.success('Product added to cart', {
+          position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: 'light',
         });
       }
     } catch (error) {
-      toast.error("Error adding product to cart", {
-        position: "top-center",
+      toast.error('Error adding product to cart', {
+        position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: 'light',
       });
-      console.error("Error adding product to cart:", error);
+      console.error('Error adding product to cart:', error);
     }
   };
 
@@ -133,7 +145,7 @@ const ProductDetails = () => {
           {product.productName}
         </h3>
         <h4 className="text-xl text-gray-600 font-bold mt-2">
-          <span className="line-through">Rs. {varient.price}</span>{" "}
+          <span className="line-through">Rs. {varient.price}</span>{' '}
           <span className="text-green-600">
             Rs. {discountedPrice.toFixed(2)}
           </span>
@@ -169,7 +181,7 @@ const ProductDetails = () => {
           Add to Cart
         </button>
         <p className="text-gray-600 font-semibold mt-3">
-          Stock: {stock ? "Available" : "Out of Stock"}
+          Stock: {stock ? 'Available' : 'Out of Stock'}
         </p>
       </div>
       <ToastContainer />

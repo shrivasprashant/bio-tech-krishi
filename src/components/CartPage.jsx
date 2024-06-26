@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateQuantity, removeFromCart } from "../redux/cartSlice";
+import { updateQuantity, removeFromCart, setCartLength } from "../redux/cartSlice";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -9,21 +9,35 @@ const CartPage = () => {
   const [productDetails, setProductDetails] = useState([]);
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  const [cartLength, setCartLength] = useState(0);
-
   const userId = useSelector((state) => state.auth.userId);
   const authToken = useSelector((state) => state.auth.token);
 
-  const handleQuantityChange = (id, quantity) => {
+  const handleQuantityChange = async (id, quantity) => {
     if (quantity > 0) {
-      dispatch(updateQuantity({ id, quantity }));
+      try {
+        const varient = cartItems.find(item => item.varients[0].pvid === id).varients[0];
+        const totalVarientPrice = varient.price * quantity;
+        await axios.put(
+          `https://api.bhartiyabiotech.com/cart/${userId}/${id}/${totalVarientPrice}`,
+          { quantity },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            }
+          }
+        );
+        dispatch(updateQuantity({ id, quantity }));
+        fetchCartById(); // Fetch updated cart details after changing quantity
+      } catch (error) {
+        console.error("Error updating quantity:", error);
+      }
     }
   };
 
-  const revomeProductById = async (id) => {
+  const removeProductById = async (id) => {
     console.log("Removing item with id:", id);
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `https://api.bhartiyabiotech.com/cart/${userId}/${id}`,
         {
           headers: {
@@ -31,27 +45,21 @@ const CartPage = () => {
           },
         }
       );
-      fetchCart();
-      toast.success("Item removed from carttttt");
-
-      const { data } = response;
-      console.log(data.data, "dddddddddd");
+      dispatch(removeFromCart(id));
+      toast.success("Item removed from cart");
+      fetchCartById(); // Fetch updated cart details after removing item
     } catch (error) {
-      console.log(error);
+      console.error("Error removing item:", error);
     }
   };
 
   const handleRemove = (id) => {
-    revomeProductById(id);
-    dispatch(removeFromCart(id));
+    removeProductById(id);
   };
 
   const getTotalPrice = () => {
     return cartItems
-      .reduce(
-        (total, item) => total + item.varients[0].price * item.quantity,
-        0
-      )
+      .reduce((total, item) => total + item.varients[0].price * item.quantity, 0)
       .toFixed(2);
   };
 
@@ -79,15 +87,17 @@ const CartPage = () => {
 
       console.log(response, "cart response");
       fetchProductDetails(response.data.varient_quantity);
-      setCartLength(response.data.varient_quantity.length);
+      dispatch(setCartLength(response.data.varient_quantity.length));
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching cart by ID:", error);
     }
   };
 
   useEffect(() => {
-    fetchCartById();
-  }, [authToken]);
+    if (authToken && userId) {
+      fetchCartById();
+    }
+  }, [authToken, userId]);
 
   const fetchProductDetails = async (cartItems) => {
     try {
@@ -98,7 +108,7 @@ const CartPage = () => {
       );
       const productDetailsResponses = await Promise.all(productDetailsPromises);
       const productDetails = productDetailsResponses.map(
-        (response) => response.data
+        (response, index) => ({ ...response.data, quantity: cartItems[index].quantity })
       );
       setProductDetails(productDetails);
     } catch (error) {
@@ -109,7 +119,7 @@ const CartPage = () => {
   return (
     <div className="container mx-auto p-4 bg-gray-200">
       <h2 className="text-3xl font-bold mb-6 text-center">Shopping Cart</h2>
-      {productDetails?.length === 0 ? (
+      {productDetails.length === 0 ? (
         <div className="text-center text-gray-600">Your cart is empty</div>
       ) : (
         <div className="flex flex-col lg:flex-row gap-6">
@@ -128,7 +138,7 @@ const CartPage = () => {
                 </div>
                 <div className="p-4 flex-1 flex flex-col">
                   <h3 className="text-lg font-semibold text-gray-700">
-                    {item.title}
+                    {item.productName}
                   </h3>
                   <p className="text-gray-600 mt-2">
                     <span className="line-through">
@@ -146,10 +156,10 @@ const CartPage = () => {
                   <p className="text-gray-600 mt-2">
                     Discount: {item.varients[0].discount}%
                   </p>
-                  <div className="flex items-center mt-4">
+                  {/* <div className="flex items-center mt-4">
                     <button
                       onClick={() =>
-                        handleQuantityChange(item.id, item.quantity - 1)
+                        handleQuantityChange(item.varients[0].pvid, item.quantity - 1)
                       }
                       className="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-l-lg"
                       disabled={item.quantity <= 1}
@@ -161,13 +171,13 @@ const CartPage = () => {
                     </span>
                     <button
                       onClick={() =>
-                        handleQuantityChange(item.id, item.quantity + 1)
+                        handleQuantityChange(item.varients[0].pvid, item.quantity + 1)
                       }
                       className="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-r-lg"
                     >
                       +
                     </button>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="px-4 pb-4">
                   <button
@@ -200,7 +210,7 @@ const CartPage = () => {
               <span className="font-semibold">₹{getTotalSavings()}</span>
             </p>
             <h3 className="text-2xl font-semibold text-gray-700">
-              Total: ₹{getTotalPrice()-getTotalSavings()}
+              Total: ₹{(getTotalPrice() - getTotalSavings()).toFixed(2)}
             </h3>
             <p className="text-gray-600 mt-2">
               Shipping and taxes calculated at checkout.

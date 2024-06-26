@@ -9,7 +9,24 @@ const OrderConfirmationPage = () => {
         return <div className="container mx-auto p-4 text-center text-gray-700">No order details found.</div>;
     }
 
-    const { cartItems, shippingInfo, total, paymentMethod, totalSavings } = orderDetails;
+    const { cartItems, shippingInfo, paymentMethod } = orderDetails;
+
+    // Calculate total and totalSavings
+    let total = 0;
+    let totalSavings = 0;
+
+    cartItems.forEach((item) => {
+        const originalPrice = item.varients[0].price;
+        const discountedPrice = originalPrice - (originalPrice * item.varients[0].discount) / 100;
+        const itemTotal = discountedPrice * item.quantity;
+        total += itemTotal;
+        const savingsPerItem = originalPrice - discountedPrice;
+        totalSavings += savingsPerItem * item.quantity;
+    });
+
+    // Format total and totalSavings to 2 decimal places
+    const formattedTotal = total.toFixed(2);
+    const formattedTotalSavings = totalSavings.toFixed(2);
 
     return (
         <div className="container mx-auto p-4">
@@ -24,10 +41,16 @@ const OrderConfirmationPage = () => {
                                 <img src={item.imageUrl} alt={item.title} className="w-16 h-16 object-contain mr-4" />
                                 <span>{item.title} x {item.quantity}</span>
                             </div>
-                            <div className=" text-right flex-col  items-center">
-                                <span className='line-through block'>Rs .{(item.varients[0].price * item.quantity).toFixed(2)}</span> 
-                                <span>Rs .{(item.varients[0].price * item.quantity)-(item.varients[0].discount).toFixed(2)}</span> <br />
-                                <span>Save Rs .{(item.varients[0].discount * item.quantity).toFixed(2)}</span>
+                            <div className="text-right">
+                                <div>
+                                    <span className='line-through'>₹{item.varients[0].price.toFixed(2)}</span>
+                                </div>
+                                <div>
+                                    <span>₹{(item.varients[0].price - (item.varients[0].price * item.varients[0].discount) / 100).toFixed(2)}</span>
+                                </div>
+                                <div>
+                                    <span>Save ₹{((item.varients[0].discount / 100) * item.varients[0].price * item.quantity).toFixed(2)}</span>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -41,11 +64,11 @@ const OrderConfirmationPage = () => {
                 </div>
                 <div className="flex justify-between text-lg font-semibold text-gray-700 mb-4">
                     <span>Total:</span>
-                    <span>₹{total}</span>
+                    <span>₹{formattedTotal}</span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold text-green-500 mb-4">
                     <span>Total Savings:</span>
-                    <span>₹{totalSavings}</span>
+                    <span>₹{formattedTotalSavings}</span>
                 </div>
                 <div className="mb-4">
                     <h4 className="font-semibold text-gray-700">Payment Method:</h4>

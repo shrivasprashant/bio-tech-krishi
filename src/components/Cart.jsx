@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "axios";
+// Cart.js
+import React, { useEffect } from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { setCartLength } from '../redux/cartSlice';
 
 const Cart = () => {
   const userId = useSelector((state) => state.auth.userId);
   const authToken = useSelector((state) => state.auth.token);
-  const [cartLength, setCartLength] = useState(0);
+  const cartLength = useSelector((state) => state.cart.cartLength);
+  const dispatch = useDispatch();
 
   const fetchCartById = async () => {
     try {
@@ -19,7 +22,7 @@ const Cart = () => {
           },
         }
       );
-      setCartLength(response.data.varient_quantity.length);
+      dispatch(setCartLength(response.data.varient_quantity.length));
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +32,7 @@ const Cart = () => {
     if (authToken && userId) {
       fetchCartById();
     }
-  }, [authToken, userId, cartLength]);
+  }, [authToken, userId]);
 
   return (
     <div className="cart">

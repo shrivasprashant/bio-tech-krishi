@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Routess from "./components/Routess";
 import SearchedProduct from "./components/SearchedProduct";
 import Chat from "./components/Chat";
+import PhoneCallIcon from "./components/PhoneCallIcon";
 const App = () => {
   const location = useLocation();
   const adminPaths = [
@@ -29,7 +30,7 @@ const App = () => {
       {!isAdminRoute && <Header />}
       <Routess />
       <Chat />
-
+      <PhoneCallIcon phoneNumber={"919201016798"}/>
       {!isAdminRoute && <Footer />}
     </div>
   );
