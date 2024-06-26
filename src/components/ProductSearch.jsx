@@ -26,11 +26,11 @@ const ProductSearch = () => {
     };
 
     return (
-        <div className="mb-5">
+        <div className="">
             <form className='flex items-center gap-2'>
                 <input
                     type="text"
-                    className='border hidden md:block rounded-sm px-4 py-2 md:w-40 lg:w-96'
+                    className='outline-none  rounded-sm p-1 md:px-4 py-2 w-24 md:w-40 lg:w-96'
                     placeholder="Search product..."
                     value={searchQuery}
                     onChange={handleInputChange}

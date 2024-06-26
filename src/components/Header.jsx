@@ -15,22 +15,6 @@ import SearchedProduct from './SearchedProduct';
 
 
 const Header = () => {
-  // ..............................................search bar................................................
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const [dropdownOpen, setDropdownOpen] = useState({
     fertilizers: false,
@@ -65,7 +49,7 @@ const Header = () => {
 
   return (
     <header className='bg-lime-200 shadow-md relaive top-0 z-20 w-full'>
-      <div className='hidden md:block text-sm py-1'>
+      <div className='hidden md:block text-sm py-1 '>
         <div className='container mx-auto  flex justify-between items-center text-gray-600'>
           <div className='flex gap-4'>
             <a href="/about" className='hover:text-green-600 transition'>About Us</a>
@@ -81,7 +65,7 @@ const Header = () => {
       </div>
       <hr />
 
-      <div className=' flex flex-wrap items-center justify-between bg-white w-full px-4'>
+      <div className='  flex flex-wrap items-center justify-between bg-red-600 w-full px-4'>
         <div className='flex items-center gap-4 '>
           <img className='w-32 md:pl-0 md:h-full md:w-30' src={log} alt="Logo" />
 
