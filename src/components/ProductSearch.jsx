@@ -30,7 +30,7 @@ const ProductSearch = () => {
             <form className='flex items-center gap-2'>
                 <input
                     type="text"
-                    className='outline-none  rounded-sm p-1 md:px-4 py-2 w-24 md:w-40 lg:w-96'
+                    className='outline-none border  rounded-sm p-1 md:px-4 py-2 w-24 md:w-40 lg:w-96'
                     placeholder="Search product..."
                     value={searchQuery}
                     onChange={handleInputChange}

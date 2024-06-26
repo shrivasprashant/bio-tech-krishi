@@ -54,7 +54,7 @@ const Header = () => {
           <div className='flex gap-4'>
             <a href="/about" className='hover:text-green-600 transition'>About Us</a>
             <a href="/profile" className='hover:text-green-600 transition'>My Account</a>
-            <a href="/cart" className='hover:text-green-600 transition'>Wishlists</a>
+            {/* <a href="/cart" className='hover:text-green-600 transition'>Wishlists</a> */}
             <a href="/orders" className='hover:text-green-600 transition'>Order Tracking</a>
           </div>
           <div className='flex gap-4'>
@@ -65,10 +65,13 @@ const Header = () => {
       </div>
       <hr />
 
-      <div className='  flex flex-wrap items-center justify-between bg-red-600 w-full px-4'>
+      <div className='  flex flex-wrap items-center justify-between bg-white w-full px-4'>
         <div className='flex items-center gap-4 '>
           <img className='w-32 md:pl-0 md:h-full md:w-30' src={log} alt="Logo" />
 
+
+        </div>
+        <div className="">
           <ProductSearch />
           <SearchedProduct />
         </div>
@@ -80,13 +83,13 @@ const Header = () => {
           >
             Products <LuGitCompare />
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to='/wishlist'
             className='flex items-center gap-2 hover:text-green-600 transition'
             activeClassName='text-green-600'
           >
             Wishlist <FaRegHeart />
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to='/cart'
             className='flex items-center gap-2 hover:text-green-600 transition'
@@ -296,7 +299,7 @@ const Header = () => {
           <li className='mb-4'><NavLink to='/productlist'>Products</NavLink></li>
           <li className='mb-4'><NavLink to='/cart'>Cart</NavLink></li>
           <li className='mb-4'><NavLink to='/userorders'>Order</NavLink></li>
-          <li className='mb-4'><NavLink to='/wishlist'>Wishlist</NavLink></li>
+          {/* <li className='mb-4'><NavLink to='/wishlist'>Wishlist</NavLink></li> */}
           {authToken ? (<li className='mb-4'><NavLink to='/logout'>Logout</NavLink></li>) : (
             <li className='mb-4'><NavLink to='/signin'>Login</NavLink></li>
           )}
