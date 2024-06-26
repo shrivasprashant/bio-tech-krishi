@@ -19,6 +19,7 @@ const App = () => {
     "/AdminProfile",
     "/signup",
     "/signin",
+    "/sliderUpload"
   ];
 
   const isAdminRoute = adminPaths.some((path) =>
