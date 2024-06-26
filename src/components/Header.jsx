@@ -304,7 +304,7 @@ const Header = () => {
         </div>
       </nav>
       <div
-        className={`absolute top-30 left-0 z-50 h-64 w-72 bg-gray-100 text-black p-5  duration-300 easween-in-out transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`absolute top-30 left-0 z-50 h-64 w-72 bg-gray-100 text-black px-5 py-3 duration-300 easween-in-out transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
           } lg:hidden`}
       >
         <ul onClick={() => setIsOpen(false)}>
