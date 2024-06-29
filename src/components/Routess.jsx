@@ -27,6 +27,8 @@ import PrivateRoute from "./PrivateRoute";
 import UserOrder from "./UserOrders";
 import SliderImage from "./AdminPannel/Dash/SliderImage";
 import Blogs from "./Blogs";
+import ProductView from "./ProductView";
+
 
 const Routess = () => {
   return (
@@ -42,6 +44,8 @@ const Routess = () => {
         <Route path="/product/:productId" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/blog" element={<Blogs />} />
+        <Route path="productview" element={<ProductView/>}/>
+        {/* <Route path="/testproduct" element={<Testproduct />} /> */}
         <Route
           path="/checkout"
           element={<PrivateRoute element={CheckoutPage} />}

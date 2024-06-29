@@ -3,10 +3,10 @@ import React from 'react';
 const AboutUs = () => {
   return (
     <div className="bg-gray-100 p-4">
-  <section className="text-center my-8" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1620200423727-8127f75d7f53?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGFncmljdWx0dXJlfGVufDB8fDB8fHww)', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '5px', height: '240px', width: '100%' }}>
+  <section className="text-center my-8" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1523124796445-9d5e12909d2c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '5px', height: '240px', width: '100%' }}>
     <div className=" items-center justify-center p-4">
-      <h1 className="text-4xl font-extrabold mb-4">About Us</h1>
-      <p className="text-green-600 font-semibold text-2xl max-w-2xl mx-auto">
+      <h1 className="text-4xl text-white  font-extrabold mb-4">About Us</h1>
+      <p className="text-white font-semibold text-2xl max-w-2xl mx-auto">
       Empowering Agriculture, Enriching Lives: Bhartiya Bio-Tech, Your Partner in Progress.
       </p>
     </div>
@@ -55,124 +55,70 @@ const AboutUs = () => {
 
 
       </section>
+     
+     <section>
+     <div class="bg-gray-50 grid lg:grid-cols-2 gap-6 px-6 py-12 font-[sans-serif]">
+          <div class="space-y-6">
+              <div class="bg-white shadow-md rounded-lg transition-all" role="accordion">
+                  <button type="button" class="w-full text-sm font-semibold text-left p-6 text-blue-600
+         flex items-center hover:text-blue-600 transition-all">
+                      <span class="mr-4">Are there any special discounts or promotions available during the event.</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-[14px] fill-current ml-auto shrink-0" viewBox="0 0 124 124">
+                          <path d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z" data-original="#000000" />
+                      </svg>
+                  </button>
+                  <div class="pb-6 px-6">
+                      <p class="text-sm text-gray-600 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor auctor arcu,
+                          at fermentum dui. Maecenas
+                          vestibulum a turpis in lacinia. Proin aliquam turpis at erat venenatis malesuada. Sed semper, justo vitae
+                          consequat fermentum, felis diam posuere ante, sed fermentum quam justo in dui. Nulla facilisi. Nulla aliquam
+                          auctor purus, vitae dictum dolor sollicitudin vitae. Sed bibendum purus in efficitur consequat. Fusce et
+                          tincidunt arcu. Curabitur ac lacus lectus. Morbi congue facilisis sapien, a semper orci facilisis in.
+                      </p>
+                  </div>
+              </div>
 
-      <section className="text-center my-8">
-  <h2 className="text-3xl font-bold text-green-600 mb-4">Meet Our Leaders</h2>
-  <p className="text-gray-700 max-w-2xl font-semibold mx-auto mb-8">
-    Get to know the driving force behind Bhartiya Biotech's success. Meet our visionary leaders who are shaping the future of agriculture with their expertise, dedication, and innovative spirit.
-  </p>
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-    <div className="flex flex-col items-center">
-      <div className="bg-gray-200 rounded-full h-32 w-32 mb-4 flex items-center justify-center">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcToeQg-PHV3vsi84RWd5OWH64lOHfnl5r9YnHtCyJqZKH81Y0n4" alt="Rajesh Gupta" className="h-full w-full object-cover rounded-full" />
+              <div class="bg-white shadow-md rounded-lg transition-all" role="accordion">
+                  <button type="button" class="w-full text-sm font-semibold text-left p-6 text-gray-800 flex items-center hover:text-blue-600 transition-all">
+                      <span class="mr-4">What are the dates and locations for the product launch events?</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-[14px] fill-current ml-auto shrink-0" viewBox="0 0 42 42">
+                          <path d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z" data-original="#000000" />
+                      </svg>
+                  </button>
+                  <div class="hidden pb-6 px-6">
+                      <p class="text-sm text-gray-600 leading-relaxed">Content</p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="space-y-4">
+              <div class="bg-white shadow-md rounded-lg transition-all" role="accordion">
+                  <button type="button" class="w-full text-sm font-semibold text-left p-6 text-gray-800 flex items-center hover:text-blue-600 transition-all">
+                      <span class="mr-4">Can I bring a guest with me to the product launch event?</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-[14px] fill-current ml-auto shrink-0" viewBox="0 0 42 42">
+                          <path d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z" data-original="#000000" />
+                      </svg>
+                  </button>
+                  <div class="hidden pb-6 px-6">
+                      <p class="text-sm text-gray-600 leading-relaxed">Content</p>
+                  </div>
+              </div>
+
+              <div class="bg-white shadow-md rounded-lg transition-all" role="accordion">
+                  <button type="button" class="w-full text-sm font-semibold text-left p-6 text-gray-800 flex items-center hover:text-blue-600 transition-all">
+                      <span class="mr-4">Are there any special discounts or promotions available during the event.</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-[14px] fill-current ml-auto shrink-0" viewBox="0 0 42 42">
+                          <path d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z" data-original="#000000" />
+                      </svg>
+                  </button>
+                  <div class="hidden pb-6 px-6">
+                      <p class="text-sm text-gray-600 leading-relaxed">Content</p>
+                  </div>
+              </div>
+          </div>
       </div>
-      <h3 className="text-xl font-bold">Rajesh Gupta</h3>
-      <p className="text-gray-500">Chairman</p>
-      <div className="flex space-x-2 mt-2">
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M8.77 1.58c2.34 0 2.62.01 3.54.05.86.04 1.32.18 1.63.3.41.17.7.35 1.01.66.3.3.5.6.65 1 .12.32.27.78.3 1.64.05.92.06 1.2.06 3.54s-.01 2.62-.05 3.54a4.79 4.79 0 01-.3 1.63c-.17.41-.35.7-.66 1.01-.3.3-.6.5-1.01.66-.31.12-.77.26-1.63.3-.92.04-1.2.05-3.54.05s-2.62 0-3.55-.05a4.79 4.79 0 01-1.62-.3c-.42-.16-.7-.35-1.01-.66-.31-.3-.5-.6-.66-1a4.87 4.87 0 01-.3-1.64c-.04-.92-.05-1.2-.05-3.54s0-2.62.05-3.54c.04-.86.18-1.32.3-1.63.16-.41.35-.7.66-1.01.3-.3.6-.5 1-.65.32-.12.78-.27 1.63-.3.93-.05 1.2-.06 3.55-.06zm0-1.58C6.39 0 6.09.01 5.15.05c-.93.04-1.57.2-2.13.4-.57.23-1.06.54-1.55 1.02C1 1.96.7 2.45.46 3.02c-.22.56-.37 1.2-.4 2.13C0 6.1 0 6.4 0 8.77s.01 2.68.05 3.61c.04.94.2 1.57.4 2.13.23.58.54 1.07 1.02 1.56.49.48.98.78 1.55 1.01.56.22 1.2.37 2.13.4.94.05 1.24.06 3.62.06 2.39 0 2.68-.01 3.62-.05.93-.04 1.57-.2 2.13-.41a4.27 4.27 0 001.55-1.01c.49-.49.79-.98 1.01-1.56.22-.55.37-1.19.41-2.13.04-.93.05-1.23.05-3.61 0-2.39 0-2.68-.05-3.62a6.47 6.47 0 00-.4-2.13 4.27 4.27 0 00-1.02-1.55A4.35 4.35 0 0014.52.46a6.43 6.43 0 00-2.13-.41A69 69 0 008.77 0z"></path>
-        <path fill="currentColor" d="M8.8 4a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7.43a2.92 2.92 0 110-5.85 2.92 2.92 0 010 5.85zM13.43 5a1.05 1.05 0 100-2.1 1.05 1.05 0 000 2.1z"></path>
-      </svg>
-      <span className="sr-only">Instagram</span>
-    </a>
-  </span>
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M16.42.61c.27 0 .5.1.69.28.19.2.28.42.28.7v15.44c0 .27-.1.5-.28.69a.94.94 0 01-.7.28h-4.39v-6.7h2.25l.31-2.65h-2.56v-1.7c0-.4.1-.72.28-.93.18-.2.5-.32 1-.32h1.37V3.35c-.6-.06-1.27-.1-2.01-.1-1.01 0-1.83.3-2.45.9-.62.6-.93 1.44-.93 2.53v1.97H7.04v2.65h2.24V18H.98c-.28 0-.5-.1-.7-.28a.94.94 0 01-.28-.7V1.59c0-.27.1-.5.28-.69a.94.94 0 01.7-.28h15.44z"></path>
-      </svg>
-      <span className="sr-only">Facebook</span>
-    </a>
-  </span>
-</div>
-
-    </div>
-    <div className="flex flex-col items-center">
-      <div className="bg-gray-200 rounded-full h-32 w-32 mb-4 flex items-center justify-center">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcToeQg-PHV3vsi84RWd5OWH64lOHfnl5r9YnHtCyJqZKH81Y0n4" alt="Priya Patel" className="h-full w-full object-cover rounded-full" />
-      </div>
-      <h3 className="text-xl font-bold">Priya Patel</h3>
-      <p className="text-gray-500">Chief Operating Officer</p>
-      <div className="flex space-x-2 mt-2">
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M8.77 1.58c2.34 0 2.62.01 3.54.05.86.04 1.32.18 1.63.3.41.17.7.35 1.01.66.3.3.5.6.65 1 .12.32.27.78.3 1.64.05.92.06 1.2.06 3.54s-.01 2.62-.05 3.54a4.79 4.79 0 01-.3 1.63c-.17.41-.35.7-.66 1.01-.3.3-.6.5-1.01.66-.31.12-.77.26-1.63.3-.92.04-1.2.05-3.54.05s-2.62 0-3.55-.05a4.79 4.79 0 01-1.62-.3c-.42-.16-.7-.35-1.01-.66-.31-.3-.5-.6-.66-1a4.87 4.87 0 01-.3-1.64c-.04-.92-.05-1.2-.05-3.54s0-2.62.05-3.54c.04-.86.18-1.32.3-1.63.16-.41.35-.7.66-1.01.3-.3.6-.5 1-.65.32-.12.78-.27 1.63-.3.93-.05 1.2-.06 3.55-.06zm0-1.58C6.39 0 6.09.01 5.15.05c-.93.04-1.57.2-2.13.4-.57.23-1.06.54-1.55 1.02C1 1.96.7 2.45.46 3.02c-.22.56-.37 1.2-.4 2.13C0 6.1 0 6.4 0 8.77s.01 2.68.05 3.61c.04.94.2 1.57.4 2.13.23.58.54 1.07 1.02 1.56.49.48.98.78 1.55 1.01.56.22 1.2.37 2.13.4.94.05 1.24.06 3.62.06 2.39 0 2.68-.01 3.62-.05.93-.04 1.57-.2 2.13-.41a4.27 4.27 0 001.55-1.01c.49-.49.79-.98 1.01-1.56.22-.55.37-1.19.41-2.13.04-.93.05-1.23.05-3.61 0-2.39 0-2.68-.05-3.62a6.47 6.47 0 00-.4-2.13 4.27 4.27 0 00-1.02-1.55A4.35 4.35 0 0014.52.46a6.43 6.43 0 00-2.13-.41A69 69 0 008.77 0z"></path>
-        <path fill="currentColor" d="M8.8 4a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7.43a2.92 2.92 0 110-5.85 2.92 2.92 0 010 5.85zM13.43 5a1.05 1.05 0 100-2.1 1.05 1.05 0 000 2.1z"></path>
-      </svg>
-      <span className="sr-only">Instagram</span>
-    </a>
-  </span>
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M16.42.61c.27 0 .5.1.69.28.19.2.28.42.28.7v15.44c0 .27-.1.5-.28.69a.94.94 0 01-.7.28h-4.39v-6.7h2.25l.31-2.65h-2.56v-1.7c0-.4.1-.72.28-.93.18-.2.5-.32 1-.32h1.37V3.35c-.6-.06-1.27-.1-2.01-.1-1.01 0-1.83.3-2.45.9-.62.6-.93 1.44-.93 2.53v1.97H7.04v2.65h2.24V18H.98c-.28 0-.5-.1-.7-.28a.94.94 0 01-.28-.7V1.59c0-.27.1-.5.28-.69a.94.94 0 01.7-.28h15.44z"></path>
-      </svg>
-      <span className="sr-only">Facebook</span>
-    </a>
-  </span>
-</div>
-
-    </div>
-    <div className="flex flex-col items-center">
-      <div className="bg-gray-200 rounded-full h-32 w-32 mb-4 flex items-center justify-center">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcToeQg-PHV3vsi84RWd5OWH64lOHfnl5r9YnHtCyJqZKH81Y0n4" alt="Amit Singh" className="h-full w-full object-cover rounded-full" />
-      </div>
-      <h3 className="text-xl font-bold">Amit Singh</h3>
-      <p className="text-gray-500">Chief Financial Officer</p>
-      <div className="flex space-x-2 mt-2">
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M8.77 1.58c2.34 0 2.62.01 3.54.05.86.04 1.32.18 1.63.3.41.17.7.35 1.01.66.3.3.5.6.65 1 .12.32.27.78.3 1.64.05.92.06 1.2.06 3.54s-.01 2.62-.05 3.54a4.79 4.79 0 01-.3 1.63c-.17.41-.35.7-.66 1.01-.3.3-.6.5-1.01.66-.31.12-.77.26-1.63.3-.92.04-1.2.05-3.54.05s-2.62 0-3.55-.05a4.79 4.79 0 01-1.62-.3c-.42-.16-.7-.35-1.01-.66-.31-.3-.5-.6-.66-1a4.87 4.87 0 01-.3-1.64c-.04-.92-.05-1.2-.05-3.54s0-2.62.05-3.54c.04-.86.18-1.32.3-1.63.16-.41.35-.7.66-1.01.3-.3.6-.5 1-.65.32-.12.78-.27 1.63-.3.93-.05 1.2-.06 3.55-.06zm0-1.58C6.39 0 6.09.01 5.15.05c-.93.04-1.57.2-2.13.4-.57.23-1.06.54-1.55 1.02C1 1.96.7 2.45.46 3.02c-.22.56-.37 1.2-.4 2.13C0 6.1 0 6.4 0 8.77s.01 2.68.05 3.61c.04.94.2 1.57.4 2.13.23.58.54 1.07 1.02 1.56.49.48.98.78 1.55 1.01.56.22 1.2.37 2.13.4.94.05 1.24.06 3.62.06 2.39 0 2.68-.01 3.62-.05.93-.04 1.57-.2 2.13-.41a4.27 4.27 0 001.55-1.01c.49-.49.79-.98 1.01-1.56.22-.55.37-1.19.41-2.13.04-.93.05-1.23.05-3.61 0-2.39 0-2.68-.05-3.62a6.47 6.47 0 00-.4-2.13 4.27 4.27 0 00-1.02-1.55A4.35 4.35 0 0014.52.46a6.43 6.43 0 00-2.13-.41A69 69 0 008.77 0z"></path>
-        <path fill="currentColor" d="M8.8 4a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7.43a2.92 2.92 0 110-5.85 2.92 2.92 0 010 5.85zM13.43 5a1.05 1.05 0 100-2.1 1.05 1.05 0 000 2.1z"></path>
-      </svg>
-      <span className="sr-only">Instagram</span>
-    </a>
-  </span>
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M16.42.61c.27 0 .5.1.69.28.19.2.28.42.28.7v15.44c0 .27-.1.5-.28.69a.94.94 0 01-.7.28h-4.39v-6.7h2.25l.31-2.65h-2.56v-1.7c0-.4.1-.72.28-.93.18-.2.5-.32 1-.32h1.37V3.35c-.6-.06-1.27-.1-2.01-.1-1.01 0-1.83.3-2.45.9-.62.6-.93 1.44-.93 2.53v1.97H7.04v2.65h2.24V18H.98c-.28 0-.5-.1-.7-.28a.94.94 0 01-.28-.7V1.59c0-.27.1-.5.28-.69a.94.94 0 01.7-.28h15.44z"></path>
-      </svg>
-      <span className="sr-only">Facebook</span>
-    </a>
-  </span>
-</div>
-
-    </div>
-    <div className="flex flex-col items-center">
-      <div className="bg-gray-200 rounded-full h-32 w-32 mb-4 flex items-center justify-center">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcToeQg-PHV3vsi84RWd5OWH64lOHfnl5r9YnHtCyJqZKH81Y0n4" alt="Deepa Sharma" className="h-full w-full object-cover rounded-full" />
-      </div>
-      <h3 className="text-xl font-bold">Deepa Sharma</h3>
-      <p className="text-gray-500">Chief Technology Officer</p>
-      <div className="flex space-x-2 mt-2">
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M8.77 1.58c2.34 0 2.62.01 3.54.05.86.04 1.32.18 1.63.3.41.17.7.35 1.01.66.3.3.5.6.65 1 .12.32.27.78.3 1.64.05.92.06 1.2.06 3.54s-.01 2.62-.05 3.54a4.79 4.79 0 01-.3 1.63c-.17.41-.35.7-.66 1.01-.3.3-.6.5-1.01.66-.31.12-.77.26-1.63.3-.92.04-1.2.05-3.54.05s-2.62 0-3.55-.05a4.79 4.79 0 01-1.62-.3c-.42-.16-.7-.35-1.01-.66-.31-.3-.5-.6-.66-1a4.87 4.87 0 01-.3-1.64c-.04-.92-.05-1.2-.05-3.54s0-2.62.05-3.54c.04-.86.18-1.32.3-1.63.16-.41.35-.7.66-1.01.3-.3.6-.5 1-.65.32-.12.78-.27 1.63-.3.93-.05 1.2-.06 3.55-.06zm0-1.58C6.39 0 6.09.01 5.15.05c-.93.04-1.57.2-2.13.4-.57.23-1.06.54-1.55 1.02C1 1.96.7 2.45.46 3.02c-.22.56-.37 1.2-.4 2.13C0 6.1 0 6.4 0 8.77s.01 2.68.05 3.61c.04.94.2 1.57.4 2.13.23.58.54 1.07 1.02 1.56.49.48.98.78 1.55 1.01.56.22 1.2.37 2.13.4.94.05 1.24.06 3.62.06 2.39 0 2.68-.01 3.62-.05.93-.04 1.57-.2 2.13-.41a4.27 4.27 0 001.55-1.01c.49-.49.79-.98 1.01-1.56.22-.55.37-1.19.41-2.13.04-.93.05-1.23.05-3.61 0-2.39 0-2.68-.05-3.62a6.47 6.47 0 00-.4-2.13 4.27 4.27 0 00-1.02-1.55A4.35 4.35 0 0014.52.46a6.43 6.43 0 00-2.13-.41A69 69 0 008.77 0z"></path>
-        <path fill="currentColor" d="M8.8 4a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7.43a2.92 2.92 0 110-5.85 2.92 2.92 0 010 5.85zM13.43 5a1.05 1.05 0 100-2.1 1.05 1.05 0 000 2.1z"></path>
-      </svg>
-      <span className="sr-only">Instagram</span>
-    </a>
-  </span>
-  <span>
-    <a href="#" className="hover:underline">
-      <svg aria-hidden="true" focusable="false" className="w-5 h-5" viewBox="0 0 18 18">
-        <path fill="currentColor" d="M16.42.61c.27 0 .5.1.69.28.19.2.28.42.28.7v15.44c0 .27-.1.5-.28.69a.94.94 0 01-.7.28h-4.39v-6.7h2.25l.31-2.65h-2.56v-1.7c0-.4.1-.72.28-.93.18-.2.5-.32 1-.32h1.37V3.35c-.6-.06-1.27-.1-2.01-.1-1.01 0-1.83.3-2.45.9-.62.6-.93 1.44-.93 2.53v1.97H7.04v2.65h2.24V18H.98c-.28 0-.5-.1-.7-.28a.94.94 0 01-.28-.7V1.59c0-.27.1-.5.28-.69a.94.94 0 01.7-.28h15.44z"></path>
-      </svg>
-      <span className="sr-only">Facebook</span>
-    </a>
-  </span>
-</div>
-
-    </div>
-  </div>
-  <button className="mt-8 px-4 py-2 bg-black text-white hover:border hover:text-black hover:bg-slate-300  rounded">View the team</button>
-</section>
+     </section>
+    
     </div>
   );
 };

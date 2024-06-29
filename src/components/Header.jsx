@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import LogoutButton from './LogoutButton';
 import ProductSearch from './ProductSearch';
 import SearchedProduct from './SearchedProduct';
+import Transolate from './Transolate';
 
 
 const Header = () => {
@@ -48,14 +49,16 @@ const Header = () => {
   };
 
   return (
-    <header className='bg-lime-200 shadow-md relaive top-0 z-20 w-full'>
+    <header className='bg-[#597445] shadow-md relaive  top-0 z-20 w-full mb-5'>
       <div className='hidden md:block text-sm py-1 '>
-        <div className='container mx-auto  flex justify-between items-center text-gray-600'>
+        <div className='container mx-auto  flex justify-between items-center px-6 text-white'>
           <div className='flex gap-4'>
-            <a href="/about" className='hover:text-green-600 transition'>About Us</a>
+            <a href="/about" className='hover:text-green-600 transition '>About Us</a>
             <a href="/profile" className='hover:text-green-600 transition'>My Account</a>
             {/* <a href="/cart" className='hover:text-green-600 transition'>Wishlists</a> */}
-            <a href="/orders" className='hover:text-green-600 transition'>Order Tracking</a>
+            {/* <a href="/orders" className='hover:text-green-600 transition'>Order Tracking</a> */}
+            
+
           </div>
           <div className='flex gap-4'>
             <h1>Need help? Call Us +91 9201016798</h1>
@@ -65,7 +68,7 @@ const Header = () => {
       </div>
       <hr />
 
-      <div className='  flex flex-wrap items-center justify-between bg-white w-full px-4'>
+      <div className='  flex flex-wrap items-center justify-between   bg-[#E7F0DC] w-full px-4'>
         <div className='flex items-center gap-4 '>
           <img className='w-32 md:pl-0 md:h-full md:w-30' src={log} alt="Logo" />
 
@@ -75,11 +78,11 @@ const Header = () => {
           <ProductSearch />
           <SearchedProduct />
         </div>
-        <div className='md:ml-2 items-center lg:flex  hidden md:gap-6 text-lg'>
+        <div className='md:ml-2 items-center lg:flex  hidden md:gap-6  text-lg '>
           <NavLink
             to='/productlist'
-            className='flex items-center gap-2 hover:text-green-600 transition'
-            activeClassName='text-green-600'
+            className='flex items-center gap-2 p-1 bg-green-700  rounded-lg text-white hover:text-white hover:bg-[#3a5c3a] transition'
+            activeClassName='text-green-400'
           >
             Products <LuGitCompare />
           </NavLink>
@@ -92,7 +95,7 @@ const Header = () => {
           </NavLink> */}
           <NavLink
             to='/cart'
-            className='flex items-center gap-2 hover:text-green-600 transition'
+            className='flex items-center text-white p-1 gap-2  bg-green-700 rounded-md hover:bg-[#3a5c3a] transition'
             activeClassName='text-green-600'
           >
             Cart <Cart />
@@ -100,7 +103,7 @@ const Header = () => {
           <div className='relative'>
             <button
               onClick={toggleAccountDropdown}
-              className='flex items-center gap-2 hover:text-green-600 transition'
+              className='flex items-center gap-2 text-white p-1 bg-green-700 rounded-md hover:bg-[#3a5c3a] transition'
             >
               Account <VscAccount />
             </button>
@@ -165,7 +168,7 @@ const Header = () => {
           </NavLink>
           <div className='relative'>
             <button
-              className='flex items-center hover:text-green-600 transition'
+              className='flex items-center  bg-green-600 rounded-md hover:text-green-600 transition'
               onClick={() => toggleDropdown('fertilizers')}
             >
               Fertilizers <FaChevronDown className='ml-1' />

@@ -13,7 +13,7 @@ const AddCart = () => {
             <div className="grid sm:grid-cols-3 items-center gap-4">
               <div className="sm:col-span-2 flex items-center gap-4">
                 <div className="w-24 h-24 shrink-0 bg-white p-1 rounded-md">
-                  <img src='https://readymadeui.com/images/product14.webp' className="w-full h-full object-contain" />
+                  <img src='' className="w-full h-full object-contain" />
                 </div>
 
                 <div>
@@ -64,7 +64,7 @@ const AddCart = () => {
             <div className="grid sm:grid-cols-3 items-center gap-4">
               <div className="sm:col-span-2 flex items-center gap-4">
                 <div className="w-24 h-24 shrink-0 bg-white p-1 rounded-md">
-                  <img src='https://readymadeui.com/images/watch6.webp' className="w-full h-full object-contain" />
+                  <img src='' className="w-full h-full object-contain" />
                 </div>
 
                 <div>

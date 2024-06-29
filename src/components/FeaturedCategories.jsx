@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const FeaturedCategories = () => {
     const settings = {
-        dots: true,
+       dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
@@ -38,7 +38,7 @@ const FeaturedCategories = () => {
     };
 
     return (
-        <section className="popular-categories py-8">
+        <section className="popular-categories   p-8">
             <div className="container mx-auto">
                 <div className="section-title flex justify-center items-center mb-6">
                     <div className="title ">
@@ -52,10 +52,10 @@ const FeaturedCategories = () => {
                 <div className="relative">
                     <Slider {...settings}>
                         {categories.map((category, index) => (
-                            <div key={index} className="p-4 bg-lime-100 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg text-center">
+                            <div key={index} className="p-4  px-6  hover:shadow-2xl transition-shadow duration-300 rounded-2xl  text-center">
                                 <figure className="overflow-hidden flex  items-center justify-center mb-4">
                                     <a href="#">
-                                        <img src={category.imgSrc} alt={category.name} className="w-[200px] h-auto transition-transform duration-300 transform hover:scale-105 rounded-lg" />
+                                        <img src={category.imgSrc} alt={category.name} className="w-[200px] h-auto transition-transform duration-300 transform hover:scale-110 rounded-lg" />
                                     </a>
                                 </figure>
                                 <h6 className="text-lg font-semibold mb-2">

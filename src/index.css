@@ -1,7 +1,23 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-  font-family: Georgia, serif;
+
+
+@font-face {
+  font-family: 'Gilroy-Regular'; /* Choose a descriptive name for the font family */
+  src: url('/public/font/Gilroy-Regular.woff2') format('woff2'),
+       url('/public/font/Gilroy-RegularItalic.woff2') format('woff'),
+       url('/public/font/Gilroy-Bold.woff2') format('woff'); /* Provide fallback formats for older browsers */
+       
+}
+
+
+
+
+
+body{ 
+  /* font-family: Georgia, serif 'MyFont' ; */
+  font-family: 'Gilroy-Regular';
 }
