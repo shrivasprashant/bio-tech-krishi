@@ -9,7 +9,7 @@ const Chat = () => {
     <div>
       <div>
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-          <button className="md:w-32 md:p-0 p-2 z-50 fixed top-[90%] right-[5%] bg-green-100 rounded-full flex items-center justify-center">
+          <button className="md:w-32 md:p-0 p-2 z-50 fixed top-[85%] right-[5%] bg-green-100 rounded-full flex items-center justify-center">
             <p className="text-center text-sm hidden md:block">Chat with us</p>
             <IoLogoWhatsapp
               style={{

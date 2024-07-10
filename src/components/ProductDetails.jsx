@@ -1,6 +1,5 @@
-// ProductDetails.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, setCartLength } from '../redux/cartSlice';
@@ -13,8 +12,10 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const product = useSelector((state) => state.product.singleProduct);
+  console.log(quantity);
+  const products = useSelector((state) => state.product.singleProduct);
   const dispatch = useDispatch();
+  const [product, setProduct] = useState({});
   const [stock, setStock] = useState(true);
 
   const userId = useSelector((state) => state.auth.userId);
@@ -27,6 +28,7 @@ const ProductDetails = () => {
           `https://api.bhartiyabiotech.com/productf/${productId}`
         );
         dispatch(setSingleProduct(response.data));
+        setProduct(response.data);
       } catch (err) {
         setError('Error fetching the product');
         console.error('Error fetching the product:', err);
@@ -44,14 +46,12 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     try {
-      const varientsId = product.varients[0].pvid;
-      const varientsPrice = product.varients[0].price;
+      const variantId = product.varients[0].pvid;
+      const variantPrice = product.varients[0].price;
 
       const response = await axios.post(
-        `https://api.bhartiyabiotech.com/cart/${userId}/${varientsId}/${varientsPrice}`,
-        {
-          quantity,
-        },
+        `https://api.bhartiyabiotech.com/cart/${userId}/${variantId}/${quantity}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -84,6 +84,12 @@ const ProductDetails = () => {
         });
       }
     } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError('Unauthorized: Please log in again');
+      } else {
+        setError('Error adding product to cart');
+      }
+      console.error('Error adding product to cart:', error);
       toast.error('Error adding product to cart', {
         position: 'top-center',
         autoClose: 5000,
@@ -94,9 +100,9 @@ const ProductDetails = () => {
         progress: undefined,
         theme: 'light',
       });
-      console.error('Error adding product to cart:', error);
     }
   };
+
 
   const handleIncrement = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -116,7 +122,7 @@ const ProductDetails = () => {
           <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
           <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
         </div>
-        <div className="text-center mt-4 text-gray-600 text-lg font-semibold">
+        <div className="text-center mt-4 text-gray-600 text-lg font-semibold animate-bounce">
           Loading...
         </div>
       </div>
@@ -124,38 +130,46 @@ const ProductDetails = () => {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <h1 className="text-4xl font-bold text-red-500 mb-4">Something Went Wrong</h1>
+      <p className="text-lg text-gray-700 mb-8">{error  || "An unexpected error occurred."}</p>
+    </div>;
   }
 
-  const varient = product.varients[0];
+  const variant = product.varients[0];
   const discountedPrice =
-    varient.price - (varient.price * varient.discount) / 100;
+    variant.price - (variant.price * variant.discount) / 100;
 
   return (
-    <div className="bg-white md:flex items-center justify-around min-h-screen w-full px-4">
-      <div className="w-[300px] h-[300px] object-cover overflow-hidden mx-auto">
-        <img
-          src={product.imageUrl}
-          alt={product.title}
-          className="h-full w-full object-cover"
-        />
+    <div className=" md:flex items-center md:justify-around md:min-h-screen w-full md:px-4 bg-gray-100 ">
+      <div className="flex items-center justify-center md:border-r border-gray-800 md:w-[40%] h-96 md:h-screen">
+        <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-md sticky object-cover overflow-hidden mx-auto hover:scale-110 transition-all">
+          <img
+            src={product.imageUrl}
+            alt={product.title}
+            className="h-full w-full object-cover hover:scale"
+          />
+        </div>
       </div>
-      <div className="px-20 text-center flex-1 items-center">
-        <h3 className="text-lg font-semibold text-gray-600">
+      <div className="px-5 py-6 md:px-20 text-center flex-1 items-center bg-gray-100">
+        <h3 className="text-3xl font-semibold text-black tracking-tighter">
           {product.productName}
         </h3>
         <h4 className="text-xl text-gray-600 font-bold mt-2">
-          <span className="line-through">Rs. {varient.price}</span>{' '}
+          <span className="line-through">Rs. {variant.price}</span>{' '}
           <span className="text-green-600">
             Rs. {discountedPrice.toFixed(2)}
           </span>
         </h4>
-        <p>Discount: {varient.discount}%</p>
+        <p>Discount: {variant.discount}%</p>
         <h4 className="text-xl text-gray-600 font-bold mt-2">
           {product.category}
         </h4>
+        <p className="text-green-600 font-semibold mt-3">
+          Stock: {stock ? 'Available' : 'Out of Stock'}
+        </p>
         <p className="text-gray-600 font-semibold mt-3">
-          {product.description}
+          Size: {variant.size}
         </p>
         <div className="flex items-center justify-center mt-4">
           <button
@@ -173,15 +187,24 @@ const ProductDetails = () => {
             +
           </button>
         </div>
-        <button
-          onClick={handleAddToCart}
-          type="button"
-          className="bg-gray-600 font-semibold hover:bg-gray-700 text-white text-sm px-2 py-2.5 w-full mt-6"
-        >
-          Add to Cart
-        </button>
-        <p className="text-gray-600 font-semibold mt-3">
-          Stock: {stock ? 'Available' : 'Out of Stock'}
+        <div className='flex w-[100%] gap-6 md:items-center justify-center '>
+          <Link to={`/singlecheckout/${product.productId}`}
+            type="button"
+            className="bg-green-600  font-semibold hover:bg-gray-700 rounded-md text-white text-sm px-2 py-2 md:py-2.5 w-[25%] mt-6"
+          >
+            Buy Now
+          </Link>
+          <button
+            onClick={handleAddToCart}
+            type="button"
+            className="bg-red-500 font-semibold hover:bg-gray-700 text-white border border-gray-800 text-base rounded-lg text-sm px-2 py-2.5 w-[35%] mt-6"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+        <p className="text-gray-600 font-semibold mt-3 md:mt-8 tracking-normal md:border-t-2 border-gray-800 md:py-6">
+          {product.description}
         </p>
       </div>
       <ToastContainer />

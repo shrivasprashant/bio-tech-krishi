@@ -28,6 +28,9 @@ import UserOrder from "./UserOrders";
 import SliderImage from "./AdminPannel/Dash/SliderImage";
 import Blogs from "./Blogs";
 import ProductView from "./ProductView";
+import SingleProductBuy from "./SingleProductBuy";
+import SingleOrderConfirmation from "./SingleOrderConfirmation";
+import CategoryFilter from "./CategoryFilter";
 
 
 const Routess = () => {
@@ -39,16 +42,25 @@ const Routess = () => {
         <Route path="/signin" element={<Signin />} />
         <Route path="/Productlist" element={<ProductList />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/product" element={<Product />} />
+        {/* <Route path="/product" element={<Product />} /> */}
         <Route path="/hero" element={<HeroSection />} />
         <Route path="/product/:productId" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/blog" element={<Blogs />} />
-        <Route path="productview" element={<ProductView/>}/>
+        <Route path="/category/:category" element={<CategoryFilter/>}/>
+        {/* <Route path="" element={<ProductView/>}/> */}
         {/* <Route path="/testproduct" element={<Testproduct />} /> */}
         <Route
           path="/checkout"
           element={<PrivateRoute element={CheckoutPage} />}
+        />
+        <Route
+          path="/singlecheckout/:id"
+          element={<PrivateRoute element={SingleProductBuy} />}
+        />
+        <Route
+          path="/SingleOrderConfirmation"
+          element={<PrivateRoute element={SingleOrderConfirmation} />}
         />
         <Route
           path="/order-confirmation"

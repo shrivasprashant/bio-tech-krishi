@@ -48,8 +48,11 @@ const CheckoutPage = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
-    fetchCartById();
+    if (authToken && userId) {
+      fetchCartById();
+    }
   }, [authToken, userId]);
 
   const handleChange = (e) => {
@@ -117,11 +120,15 @@ const CheckoutPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (cartData.length === 0) {
+      toast.error("No items in the cart to place an order.");
+      return;
+    }
     const orderDetails = {
       customerid: userId,
-      orderviacart: false,
-      varientid: cartData[0].varient_id,
-      quantity: cartData.length,
+      orderviacart: true,
+      // varientid: cartData[0].varient_id,
+      // quantity: cartData.length,
       billingAddress: shippingInfo.address,
       paymentType: paymentType,
     };
@@ -160,27 +167,32 @@ const CheckoutPage = () => {
   };
 
   const getTotalPrice = () => {
+    if (!cartItems || cartItems.length === 0) return 0;
     return cartItems
-      .reduce(
-        (total, item) =>
-          total +
-          item.varients[0].price -
-          (item.varients[0].discount * item.quantity * item.varients[0].price) /
-            100,
-        0
-      )
+      .reduce((total, item) => {
+        if (item.varients && item.varients[0]) {
+          const variant = item.varients[0];
+          const itemTotal = variant.price * item.quantity;
+          const itemDiscount = (variant.discount * itemTotal) / 100;
+          return total + (itemTotal - itemDiscount);
+        }
+        return total;
+      }, 0)
       .toFixed(2);
   };
 
   const getTotalSavings = () => {
+    if (!cartItems || cartItems.length === 0) return 0;
     return cartItems
-      .reduce(
-        (total, item) =>
-          total +
-          (item.varients[0].price * item.quantity * item.varients[0].discount) /
-            100,
-        0
-      )
+      .reduce((total, item) => {
+        if (item.varients && item.varients[0]) {
+          const variant = item.varients[0];
+          const itemTotal = variant.price * item.quantity;
+          const itemDiscount = (variant.discount * itemTotal) / 100;
+          return total + itemDiscount;
+        }
+        return total;
+      }, 0)
       .toFixed(2);
   };
 
@@ -243,8 +255,8 @@ const CheckoutPage = () => {
                 <option value="">Select an address</option>
                 {existingAddresses.map((address) => (
                   <option key={address.id} value={address.id}>
-                    {address.name} - {address.address}, {address.city},{" "}
-                    {address.state}, {address.postalCode}, {address.country}
+                    {address.address.colony}, {address.address.city},{" "}
+                    {address.address.state}, {address.address.pincode}
                   </option>
                 ))}
               </select>
@@ -255,46 +267,65 @@ const CheckoutPage = () => {
           <h3 className="text-2xl font-semibold mb-4 text-gray-800">
             Order Summary
           </h3>
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
+            {(!cartItems || cartItems.length === 0) && (
+              <p className="text-gray-600">Your cart is empty.</p>
+            )}
             <div className="mb-4">
-              <h4 className="font-semibold text-gray-700">Items:</h4>
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between py-2 border-b"
-                >
-                  <div className="flex items-center">
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className="w-16 h-16 object-contain mr-4"
-                    />
-                    <span>
-                      {item.title} x {item.quantity}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="block line-through ">
-                      ₹{(item.varients[0].price * item.quantity).toFixed(2)}
-                    </span>
-                    <span className="block text-green-500">
-                      ₹
-                      {((item.varients[0].discount * item.quantity).toFixed(2) *
-                        (item.varients[0].price * item.quantity).toFixed(2)) /
-                        100}
-                    </span>
-                    <span className="block ">
-                      ₹
-                      {(item.varients[0].price * item.quantity).toFixed(2) -
-                        ((item.varients[0].discount * item.quantity).toFixed(
-                          2
-                        ) *
-                          (item.varients[0].price * item.quantity).toFixed(2)) /
-                          100}
-                    </span>
-                  </div>
-                </div>
-              ))}
+              {cartItems &&
+                cartItems.map((item, index) => {
+                  const firstVariant =
+                    item.varients && item.varients[0] ? item.varients[0] : {};
+
+                  return (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center mb-4"
+                    >
+                      <div className="flex items-center">
+                        <img
+                          src={firstVariant.image_url}
+                          alt={item.title}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                        <div className="ml-4">
+                          <h5 className="font-semibold text-gray-800">
+                            {item.title}
+                          </h5>
+                          <p className="text-gray-600">
+                            Quantity: {item.quantity}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className="block text-gray-700">
+                          ₹{(firstVariant.price * item.quantity).toFixed(2)}
+                        </span>
+                        <span className="block text-green-500">
+                          ₹
+                          {(
+                            ((firstVariant.discount * item.quantity).toFixed(
+                              2
+                            ) *
+                              (firstVariant.price * item.quantity).toFixed(2)) /
+                            100
+                          ).toFixed(2)}
+                        </span>
+                        <span className="block ">
+                          ₹
+                          {(
+                            (firstVariant.price * item.quantity).toFixed(2) -
+                            ((firstVariant.discount * item.quantity).toFixed(
+                              2
+                            ) *
+                              (firstVariant.price * item.quantity).toFixed(2)) /
+                              100
+                          ).toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
             <div className="flex justify-between text-lg font-semibold text-gray-700">
               <span>Total:</span>

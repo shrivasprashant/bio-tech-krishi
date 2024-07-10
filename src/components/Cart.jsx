@@ -23,6 +23,7 @@ const Cart = () => {
         }
       );
       dispatch(setCartLength(response.data.varient_quantity.length));
+      console.log(response.data.varient_quantity.length, 'cart length');
     } catch (error) {
       console.log(error);
     }

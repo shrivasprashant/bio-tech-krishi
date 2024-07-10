@@ -9,7 +9,7 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState([0, 100000000]);
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
 
@@ -56,7 +56,16 @@ const ProductList = () => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="flex items-center justify-center space-x-2 animate-bounce">
+        <div className="w-8 h-8 bg-green-500 rounded-full"></div>
+        <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+        <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
+      </div>
+      <div className="text-center mt-4 text-gray-600 text-lg font-semibold animate-bounce">
+        Loading...
+      </div>
+    </div>;
   }
 
   if (error) {
@@ -134,9 +143,9 @@ const ProductList = () => {
                     <h3 className="text-lg font-semibold text-gray-600">
                       {product.productName}
                     </h3>
-                    <h3 className="text-lg font-semibold text-gray-600">
+                    {/* <h3 className="text-lg font-semibold text-gray-600">
                       {product.description}
-                    </h3>
+                    </h3> */}
                     <h3 className="text-lg font-semibold text-gray-600">
                       {product.category}
                     </h3>

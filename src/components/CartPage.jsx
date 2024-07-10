@@ -15,19 +15,21 @@ const CartPage = () => {
   const handleQuantityChange = async (id, quantity) => {
     if (quantity > 0) {
       try {
-        const varient = cartItems.find(item => item.varients[0].pvid === id).varients[0];
-        const totalVarientPrice = varient.price * quantity;
-        await axios.put(
-          `https://api.bhartiyabiotech.com/cart/${userId}/${id}/${totalVarientPrice}`,
-          { quantity },
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
+        const varient = cartItems.find(item => item.varients[0]?.pvid === id)?.varients[0];
+        if (varient) {
+          const totalVarientPrice = varient.price * quantity;
+          await axios.post(
+            `https://api.bhartiyabiotech.com/cart/${userId}/${id}/${quantity}`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${authToken}`,
+              }
             }
-          }
-        );
-        dispatch(updateQuantity({ id, quantity }));
-        fetchCartById(); // Fetch updated cart details after changing quantity
+          );
+          dispatch(updateQuantity({ id, quantity }));
+          fetchCartById(); // Fetch updated cart details after changing quantity
+        }
       } catch (error) {
         console.error("Error updating quantity:", error);
       }
@@ -45,8 +47,8 @@ const CartPage = () => {
           },
         }
       );
-      dispatch(removeFromCart(id));
       toast.success("Item removed from cart");
+      dispatch(removeFromCart(id));
       fetchCartById(); // Fetch updated cart details after removing item
     } catch (error) {
       console.error("Error removing item:", error);
@@ -57,18 +59,27 @@ const CartPage = () => {
     removeProductById(id);
   };
 
-  const getTotalPrice = () => {
-    return cartItems
-      .reduce((total, item) => total + item.varients[0].price * item.quantity, 0)
-      .toFixed(2);
+  const getTotalPrice = (cartItems) => {
+    if (!cartItems || cartItems.length === 0) {
+      return 0; // or any default value you want
+    }
+
+    return cartItems.reduce((total, item) => {
+      const price = item?.varients?.[0]?.price || 0; // Ensure item and item.price are defined
+      return total + (price * item.quantity);
+    }, 0);
   };
 
   const getTotalSavings = () => {
+    if (!cartItems || cartItems.length === 0) {
+      return 0; // or any default value you want
+    }
+
     return cartItems
       .reduce((total, item) => {
-        const originalPrice = item.varients[0].price;
-        const discountedPrice =
-          originalPrice - (originalPrice * item.varients[0].discount) / 100;
+        const originalPrice = item?.varients?.[0]?.price || 0;
+        const discount = item?.varients?.[0]?.discount || 0;
+        const discountedPrice = originalPrice - (originalPrice * discount) / 100;
         return total + (originalPrice - discountedPrice) * item.quantity;
       }, 0)
       .toFixed(2);
@@ -111,6 +122,7 @@ const CartPage = () => {
         (response, index) => ({ ...response.data, quantity: cartItems[index].quantity })
       );
       setProductDetails(productDetails);
+      console.log(productDetails, "product details");
     } catch (error) {
       console.error("Error fetching product details:", error);
     }
@@ -142,46 +154,30 @@ const CartPage = () => {
                   </h3>
                   <p className="text-gray-600 mt-2">
                     <span className="line-through">
-                      ₹{item.varients[0].price}
+                      ₹{item.varients?.[0]?.price}
                     </span>{" "}
                     <span className="text-green-600">
                       ₹
                       {(
-                        item.varients[0].price -
-                        (item.varients[0].price * item.varients[0].discount) /
+                        item.varients?.[0]?.price -
+                        (item.varients?.[0]?.price * item.varients?.[0]?.discount) /
                           100
                       ).toFixed(2)}
                     </span>
                   </p>
                   <p className="text-gray-600 mt-2">
-                    Discount: {item.varients[0].discount}%
+                    Discount: {item.varients?.[0]?.discount}%
                   </p>
-                  {/* <div className="flex items-center mt-4">
-                    <button
-                      onClick={() =>
-                        handleQuantityChange(item.varients[0].pvid, item.quantity - 1)
-                      }
-                      className="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-l-lg"
-                      disabled={item.quantity <= 1}
-                    >
-                      -
-                    </button>
-                    <span className="px-4 py-2 border-t border-b border-gray-200">
-                      {item.quantity}
-                    </span>
-                    <button
-                      onClick={() =>
-                        handleQuantityChange(item.varients[0].pvid, item.quantity + 1)
-                      }
-                      className="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-r-lg"
-                    >
-                      +
-                    </button>
-                  </div> */}
+                  <p className="text-gray-600 mt-2">
+                    Size: {item.varients?.[0]?.size}
+                  </p>
+                  <p className="text-gray-600 mt-2">
+                    Quantity: {item.quantity}
+                  </p>
                 </div>
                 <div className="px-4 pb-4">
                   <button
-                    onClick={() => handleRemove(item.varients[0].pvid)}
+                    onClick={() => handleRemove(item.varients?.[0]?.pvid)}
                     type="button"
                     className="w-full bg-red-600 text-white font-semibold py-2 rounded-lg hover:bg-red-700"
                   >
@@ -197,7 +193,7 @@ const CartPage = () => {
             </h3>
             <p className="text-gray-600">
               Subtotal:{" "}
-              <span className="font-semibold">₹{getTotalPrice()}</span>
+              <span className="font-semibold">₹{getTotalPrice(cartItems)}</span>
             </p>
             <p className="text-gray-600">
               Shipping: <span className="font-semibold">Free</span>
@@ -210,7 +206,7 @@ const CartPage = () => {
               <span className="font-semibold">₹{getTotalSavings()}</span>
             </p>
             <h3 className="text-2xl font-semibold text-gray-700">
-              Total: ₹{(getTotalPrice() - getTotalSavings()).toFixed(2)}
+              Total: ₹{(getTotalPrice(cartItems) - getTotalSavings()).toFixed(2)}
             </h3>
             <p className="text-gray-600 mt-2">
               Shipping and taxes calculated at checkout.

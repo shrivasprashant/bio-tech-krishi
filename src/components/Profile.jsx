@@ -37,7 +37,16 @@ const Profile = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="flex items-center justify-center h-screen bg-gray-100">
+            <div className="flex items-center justify-center space-x-2 animate-bounce">
+                <div className="w-8 h-8 bg-green-500 rounded-full"></div>
+                <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+                <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
+            </div>
+            <div className="text-center mt-4 text-gray-600 text-lg font-semibold animate-bounce">
+                Loading...
+            </div>
+        </div>;
     }
 
     if (error) {

@@ -16,12 +16,14 @@ const OrderConfirmationPage = () => {
     let totalSavings = 0;
 
     cartItems.forEach((item) => {
-        const originalPrice = item.varients[0].price;
-        const discountedPrice = originalPrice - (originalPrice * item.varients[0].discount) / 100;
-        const itemTotal = discountedPrice * item.quantity;
-        total += itemTotal;
-        const savingsPerItem = originalPrice - discountedPrice;
-        totalSavings += savingsPerItem * item.quantity;
+        if (item.varients && item.varients[0]) {
+            const originalPrice = item.varients[0].price;
+            const discountedPrice = originalPrice - (originalPrice * item.varients[0].discount) / 100;
+            const itemTotal = discountedPrice * item.quantity;
+            total += itemTotal;
+            const savingsPerItem = originalPrice - discountedPrice;
+            totalSavings += savingsPerItem * item.quantity;
+        }
     });
 
     // Format total and totalSavings to 2 decimal places
@@ -42,15 +44,21 @@ const OrderConfirmationPage = () => {
                                 <span>{item.title} x {item.quantity}</span>
                             </div>
                             <div className="text-right">
-                                <div>
-                                    <span className='line-through'>₹{item.varients[0].price.toFixed(2)}</span>
-                                </div>
-                                <div>
-                                    <span>₹{(item.varients[0].price - (item.varients[0].price * item.varients[0].discount) / 100).toFixed(2)}</span>
-                                </div>
-                                <div>
-                                    <span>Save ₹{((item.varients[0].discount / 100) * item.varients[0].price * item.quantity).toFixed(2)}</span>
-                                </div>
+                                {item.varients && item.varients[0] ? (
+                                    <>
+                                        <div>
+                                            <span className='line-through'>₹{item.varients[0].price.toFixed(2)}</span>
+                                        </div>
+                                        <div>
+                                            <span>₹{(item.varients[0].price - (item.varients[0].price * item.varients[0].discount) / 100).toFixed(2)}</span>
+                                        </div>
+                                        <div>
+                                            <span>Save ₹{((item.varients[0].discount / 100) * item.varients[0].price * item.quantity).toFixed(2)}</span>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <span>Variant information not available</span>
+                                )}
                             </div>
                         </div>
                     ))}

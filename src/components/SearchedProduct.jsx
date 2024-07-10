@@ -12,7 +12,7 @@ const SearchedProduct = () => {
     const showbox = useSelector((state) => state.product.showbox);
     const filteredProducts = useSelector((state) => state.product.filteredProducts);
     return (
-        <div className={`${showbox ? 'block' : 'hidden'} container flex items-center justify-center w-24 md:w-40 mx-auto absolute top-20 left-48 md:top-[16.8%] md:left-[32%] z-50 p-5  bg-white`}>
+        <div className={`${showbox ? 'block' : 'hidden'} container flex items-center justify-center w-28 md:w-40 mx-auto absolute top-20 left-48 md:top-[16.8%] md:left-[32%] z-50 p-5  bg-white`}>
 
             <div className="grid grid-cols-1">
                 {filteredProducts.length > 0 ? (

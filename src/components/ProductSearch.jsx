@@ -30,12 +30,12 @@ const ProductSearch = () => {
             <form className='flex items-center gap-2'>
                 <input
                     type="text"
-                    className='outline-none border  rounded-sm p-1 md:px-4 py-2 w-24 md:w-40 lg:w-96'
-                    placeholder="Search product..."
+                    className='outline-none border  rounded-sm p-1 md:px-4 py-2 w-28 md:w-40 lg:w-96'
+                    placeholder="Search pro..."
                     value={searchQuery}
                     onChange={handleInputChange}
                 />
-                <button type="button" className='hidden md:block bg-green-600 text-white px-4 py-2 rounded-sm hover:bg-green-700 transition'>
+                <button type="button" className='hidden md:block bg-[#589826] text-white px-4 py-2 rounded-sm hover:bg-green-700 transition'>
                     <FaSearch />
                 </button>
             </form>

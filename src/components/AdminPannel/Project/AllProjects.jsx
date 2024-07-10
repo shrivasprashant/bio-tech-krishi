@@ -97,7 +97,9 @@ const AllProjects = () => {
               <div className="text-sm text-gray-600 mb-4">
                 <span className="font-semibold">Category:</span> {project.category}
               </div>
-              <p className="text-sm text-gray-700 mb-4"> {project.description}</p>
+              <div className="text-sm p-2 h-28 overflow-x-hidden overflow-y-auto webkit-scrollbar-hidden  ">
+                <p className="text-sm text-gray-700 mb-4"> {project.description}</p>
+              </div>
               {project.varients && project.varients.length > 0 && (
                 <div className="flex items-center mb-2">
                   <div className="font-semibold text-lg text-black">Price: ₹{project.varients[0].price}</div>

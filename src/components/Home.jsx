@@ -9,6 +9,7 @@ import FeaturedCategories from "./FeaturedCategories";
 import ImageGallery from "./ImageGallery";
 import LogoutButton from "./LogoutButton";
 import Chat from "./Chat";
+import HomeProduct from "./HomeProduct";
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
       <Banner />
       <HeroSection />
       <FeaturedCategories />
-      <Productlist />
+      <HomeProduct/>
 
       <div
         className=""

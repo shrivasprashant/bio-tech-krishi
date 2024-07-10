@@ -6,6 +6,8 @@ import Routess from "./components/Routess";
 import SearchedProduct from "./components/SearchedProduct";
 import Chat from "./components/Chat";
 import PhoneCallIcon from "./components/PhoneCallIcon";
+import Marquee from "./components/Marquee";
+
 const App = () => {
   const location = useLocation();
   const adminPaths = [
@@ -19,7 +21,8 @@ const App = () => {
     "/AdminProfile",
     "/signup",
     "/signin",
-    "/sliderUpload"
+    "/sliderUpload",
+    "/SingleOrderConfirmation"
   ];
 
   const isAdminRoute = adminPaths.some((path) =>
@@ -31,7 +34,8 @@ const App = () => {
       {!isAdminRoute && <Header />}
       <Routess />
       <Chat />
-      <PhoneCallIcon phoneNumber={"919201016798"}/>
+      <Marquee />
+      <PhoneCallIcon phoneNumber={"919201016798"} />
       {!isAdminRoute && <Footer />}
     </div>
   );

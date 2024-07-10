@@ -12,33 +12,13 @@ import { useSelector } from 'react-redux';
 import LogoutButton from './LogoutButton';
 import ProductSearch from './ProductSearch';
 import SearchedProduct from './SearchedProduct';
-import Transolate from './Transolate';
 
 
 const Header = () => {
-
-  const [dropdownOpen, setDropdownOpen] = useState({
-    fertilizers: false,
-    pesticides: false,
-    fungicides: false,
-    herbicides: false,
-  });
-
   const [isOpen, setIsOpen] = useState(false);
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false); // State for account dropdown
 
   const authToken = useSelector((state) => state.auth.token);
-
-
-  const toggleDropdown = (menu) => {
-    setDropdownOpen((prev) => ({
-      fertilizers: menu === 'fertilizers' ? !prev.fertilizers : false,
-      pesticides: menu === 'pesticides' ? !prev.pesticides : false,
-      fungicides: menu === 'fungicides' ? !prev.fungicides : false,
-      herbicides: menu === 'herbicides' ? !prev.herbicides : false,
-    }));
-  };
-
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -49,16 +29,12 @@ const Header = () => {
   };
 
   return (
-    <header className='bg-[#597445] shadow-md relaive  top-0 z-20 w-full mb-5'>
+    <header className='bg-[#467d1b] shadow-md relaive  top-0 z-20 w-full '>
       <div className='hidden md:block text-sm py-1 '>
         <div className='container mx-auto  flex justify-between items-center px-6 text-white'>
           <div className='flex gap-4'>
             <a href="/about" className='hover:text-green-600 transition '>About Us</a>
             <a href="/profile" className='hover:text-green-600 transition'>My Account</a>
-            {/* <a href="/cart" className='hover:text-green-600 transition'>Wishlists</a> */}
-            {/* <a href="/orders" className='hover:text-green-600 transition'>Order Tracking</a> */}
-            
-
           </div>
           <div className='flex gap-4'>
             <h1>Need help? Call Us +91 9201016798</h1>
@@ -67,12 +43,9 @@ const Header = () => {
         </div>
       </div>
       <hr />
-
       <div className='  flex flex-wrap items-center justify-between   bg-[#E7F0DC] w-full px-4'>
         <div className='flex items-center gap-4 '>
           <img className='w-32 md:pl-0 md:h-full md:w-30' src={log} alt="Logo" />
-
-
         </div>
         <div className="">
           <ProductSearch />
@@ -81,21 +54,14 @@ const Header = () => {
         <div className='md:ml-2 items-center lg:flex  hidden md:gap-6  text-lg '>
           <NavLink
             to='/productlist'
-            className='flex items-center gap-2 p-1 bg-green-700  rounded-lg text-white hover:text-white hover:bg-[#3a5c3a] transition'
+            className='flex items-center gap-2 p-1 bg-[#589826] rounded-lg text-white hover:text-white hover:bg-[#3a5c3a] transition'
             activeClassName='text-green-400'
           >
             Products <LuGitCompare />
           </NavLink>
-          {/* <NavLink
-            to='/wishlist'
-            className='flex items-center gap-2 hover:text-green-600 transition'
-            activeClassName='text-green-600'
-          >
-            Wishlist <FaRegHeart />
-          </NavLink> */}
           <NavLink
             to='/cart'
-            className='flex items-center text-white p-1 gap-2  bg-green-700 rounded-md hover:bg-[#3a5c3a] transition'
+            className='flex items-center text-white p-1 gap-2  bg-[#589826] rounded-md hover:bg-[#3a5c3a] transition'
             activeClassName='text-green-600'
           >
             Cart <Cart />
@@ -103,7 +69,7 @@ const Header = () => {
           <div className='relative'>
             <button
               onClick={toggleAccountDropdown}
-              className='flex items-center gap-2 text-white p-1 bg-green-700 rounded-md hover:bg-[#3a5c3a] transition'
+              className='flex items-center gap-2 text-white p-1 bg-[#589826] rounded-md hover:bg-[#3a5c3a] transition'
             >
               Account <VscAccount />
             </button>
@@ -156,141 +122,71 @@ const Header = () => {
           <FiAlignLeft className='text-2xl' />
         </button>
       </div>
-      <nav className='bg-white pb-2 hidden md:block'>
+      <nav className='bg-white p-3 hidden md:block'>
         <div className='container mx-auto flex justify-between'>
-          <NavLink
-            exact
-            to='/'
-            className='hover:text-green-600 transition'
-            activeClassName='text-green-600'
-          >
-            Home
-          </NavLink>
-          <div className='relative'>
-            <button
-              className='flex items-center  bg-green-600 rounded-md hover:text-green-600 transition'
-              onClick={() => toggleDropdown('fertilizers')}
+          <div className="relative group overflow-hidden border-2 border-gray-300 px-5 py-2 rounded-md">
+            <NavLink
+              exact
+              to='/'
+              className='flex items-center text-lg font-bold relative group z-10  rounded-md text-black hover:text-white transition px-1 overflow-hidden'
+              activeClassName='text-green-600'
             >
-              Fertilizers <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.fertilizers && (
-              <div className='absolute z-10 top-full mt-2 bg-white shadow-lg'>
-                <NavLink
-                  to='/organic-fertilizers'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Organic Fertilizers
-                </NavLink>
-                <NavLink
-                  to='/manures-soil'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Manures & Soil
-                </NavLink>
-                <NavLink
-                  to='/npk-fertilizers'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  NPK Fertilizers
-                </NavLink>
-                <NavLink
-                  to='/plant-growth-regulator'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Plant Growth Regulator
-                </NavLink>
-                <NavLink
-                  to='/bio-fertilizers'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Bio Fertilizers
-                </NavLink>
-              </div>
-            )}
+              Home
+            </NavLink>
+            <span className="absolute w-full h-full bg-[#589826] left-0 bottom-[-100%] rounded-full transition-all ease duration-400 group-hover:bottom-0 group-hover:rounded-none group-hover:text-black"></span>
           </div>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('pesticides')}
+          <div className="relative group overflow-hidden border-2 border-gray-300 px-4 py-2  rounded-md">
+            <NavLink
+              to='/category/Fertilizers'
+              className='flex items-center text-lg font-bold relative group z-10  rounded-md text-black hover:text-white transition px-1 overflow-hidden'
+              activeClassName='text-green-600'
             >
-              Pesticides <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.pesticides && (
-              <div className='absolute top-full z-10 mt-2 bg-white shadow-lg'>
-                <NavLink
-                  to='/pesticides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Pesticides
-                </NavLink>
-                <NavLink
-                  to='/chemical-insecticides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Chemical Insecticides
-                </NavLink>
-                <NavLink
-                  to='/organic-pest-control'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Organic Pest Control
-                </NavLink>
-              </div>
-            )}
+              Fertilizers
+            </NavLink>
+            <span className="absolute w-full h-full bg-[#589826] left-0 bottom-[-100%] rounded-full transition-all ease duration-400 group-hover:bottom-0 group-hover:rounded-none group-hover:text-black"></span>
           </div>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('fungicides')}
+          <div className="relative group overflow-hidden border-2 border-gray-300 px-5 py-2 rounded-md">
+            <NavLink
+              to='/category/Pesticides'
+              className='flex items-center text-lg font-bold relative group z-10  rounded-md text-black hover:text-white transition px-1 overflow-hidden'
+              activeClassName='text-green-600'
             >
-              Fungicides <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.fungicides && (
-              <div className='absolute z-10 top-full mt-2 bg-white shadow-lg'>
-                <NavLink
-                  to='/fungicides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Fungicides
-                </NavLink>
-              </div>
-            )}
+              Pesticides
+            </NavLink>
+            <span className="absolute w-full h-full bg-[#589826] left-0 bottom-[-100%] rounded-full transition-all ease duration-400 group-hover:bottom-0 group-hover:rounded-none group-hover:text-black"></span>
           </div>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('herbicides')}
+          <div className="relative group overflow-hidden border-2 border-gray-300 px-5 py-2 rounded-md">
+            <NavLink
+              to='/category/Fungicides'
+              className='flex items-center text-lg font-bold relative group z-10  rounded-md text-black hover:text-white transition px-1 overflow-hidden'
+              activeClassName='text-green-600'
             >
-              Herbicides <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.herbicides && (
-              <div className='absolute z-10 top-full mt-2 bg-white shadow-lg'>
-                <NavLink
-                  to='/herbicides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Herbicides
-                </NavLink>
-              </div>
-            )}
+              Fungicides
+            </NavLink>
+            <span className="absolute w-full h-full bg-[#589826] left-0 bottom-[-100%] rounded-full transition-all ease duration-400 group-hover:bottom-0 group-hover:rounded-none group-hover:text-black"></span>
           </div>
-          <NavLink
-            to='/blog'
-            className='hover:text-green-600 transition'
-            activeClassName='text-green-600'
-          >
-            Blogs
-          </NavLink>
+          <div className="relative group overflow-hidden border-2 border-gray-300 px-5 py-2 rounded-md">
+            <NavLink
+              to='/category/Herbicide'
+              className='flex items-center text-lg font-bold relative group z-10  rounded-md text-black hover:text-white transition px-1 overflow-hidden    '
+              activeClassName='text-green-600'
+            >
+              Herbicide
+            </NavLink>
+            <span className="absolute w-full h-full bg-[#589826] left-0 bottom-[-100%] rounded-full transition-all ease duration-400 group-hover:bottom-0 group-hover:rounded-none group-hover:text-black"></span>
+          </div>
+          <div className="relative group overflow-hidden border-2 border-gray-300 px-5 py-2 rounded-md">
+            <NavLink
+              to='/blog'
+              className='flex items-center text-lg font-bold relative group z-10  rounded-md text-black hover:text-white transition px-1 overflow-hidden  '
+              activeClassName='text-green-600'
+            >
+              Blogs
+            </NavLink>
+            <span className="absolute w-full h-full bg-[#589826] left-0 bottom-[-100%] rounded-full transition-all ease duration-400 group-hover:bottom-0 group-hover:rounded-none group-hover:text-black"></span>
+
+          </div>
+
         </div>
       </nav>
       <div
@@ -302,7 +198,6 @@ const Header = () => {
           <li className='mb-4'><NavLink to='/productlist'>Products</NavLink></li>
           <li className='mb-4'><NavLink to='/cart'>Cart</NavLink></li>
           <li className='mb-4'><NavLink to='/userorders'>Order</NavLink></li>
-          {/* <li className='mb-4'><NavLink to='/wishlist'>Wishlist</NavLink></li> */}
           {authToken ? (<li className='mb-4'><NavLink to='/logout'>Logout</NavLink></li>) : (
             <li className='mb-4'><NavLink to='/signin'>Login</NavLink></li>
           )}
@@ -317,138 +212,34 @@ const Header = () => {
           >
             Home
           </NavLink>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('fertilizers')}
-            >
-              Fertilizers <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.fertilizers && (
-              <div className='absolute top-full mt-2 bg-white shadow-lg z-50'>
-                <NavLink
-                  to='/organic-fertilizers'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Organic Fertilizers
-                </NavLink>
-                <NavLink
-                  to='/manures-soil'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Manures & Soil
-                </NavLink>
-                <NavLink
-                  to='/npk-fertilizers'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  NPK Fertilizers
-                </NavLink>
-                <NavLink
-                  to='/plant-growth-regulator'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Plant Growth Regulator
-                </NavLink>
-                <NavLink
-                  to='/bio-fertilizers'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Bio Fertilizers
-                </NavLink>
-              </div>
-            )}
-          </div>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('pesticides')}
-            >
-              Pesticides <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.pesticides && (
-              <div className='absolute top-full mt-2 bg-white shadow-lg z-50'>
-                <NavLink
-                  to='/pesticides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Pesticides
-                </NavLink>
-                <NavLink
-                  to='/chemical-insecticides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Chemical Insecticides
-                </NavLink>
-                <NavLink
-                  to='/organic-pest-control'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Organic Pest Control
-                </NavLink>
-              </div>
-            )}
-          </div>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('fungicides')}
-            >
-              Fungicides <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.fungicides && (
-              <div className='absolute top-full mt-2 bg-white shadow-lg z-50'>
-                <NavLink
-                  to='/fungicides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Fungicides
-                </NavLink>
-              </div>
-            )}
-          </div>
-          <div className='relative'>
-            <button
-              className='flex items-center hover:text-green-600 transition'
-              onClick={() => toggleDropdown('herbicides')}
-            >
-              Herbicides <FaChevronDown className='ml-1' />
-            </button>
-            {dropdownOpen.herbicides && (
-              <div className='absolute top-full mt-2 bg-white shadow-lg z-50'>
-                <NavLink
-                  to='/herbicides'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Herbicides
-                </NavLink>
-                <NavLink
-                  to='/international'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  International
-                </NavLink>
-                <NavLink
-                  to='/returns'
-                  className='block px-4 py-2 hover:text-green-600 transition'
-                  activeClassName='text-green-600'
-                >
-                  Returns
-                </NavLink>
-              </div>
-            )}
-          </div>
+          <NavLink
+            to='/category/Fertilizers'
+            className='flex items-center hover:text-green-600 transition'
+            activeClassName='text-green-600'
+          >
+            Fertilizers
+          </NavLink>
+          <NavLink
+            to='/category/Pesticides'
+            className='flex items-center hover:text-green-600 transition'
+            activeClassName='text-green-600'
+          >
+            Pesticides
+          </NavLink>
+          <NavLink
+            to='/category/Fungicides'
+            className='flex items-center hover:text-green-600 transition'
+            activeClassName='text-green-600'
+          >
+            Fungicides
+          </NavLink>
+          <NavLink
+            to='/category/Herbicides'
+            className='flex items-center hover:text-green-600 transition'
+            activeClassName='text-green-600'
+          >
+            Herbicides
+          </NavLink>
           <NavLink
             to='/blog'
             className='hover:text-green-600 transition'
@@ -470,4 +261,3 @@ const Header = () => {
 };
 
 export default Header;
-
